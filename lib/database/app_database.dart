@@ -2,8 +2,14 @@ import 'dart:io';
 
 import 'package:moor/ffi.dart';
 import 'package:moor/moor.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:muladhara_flutter/database/therapists.dart';
+import 'package:muladhara_flutter/database/users.dart';
 import 'package:path/path.dart' as p;
+import 'package:path_provider/path_provider.dart';
+
+import 'addresses.dart';
+import 'places.dart';
+import 'telephones.dart';
 
 part 'app_database.g.dart';
 
@@ -18,7 +24,9 @@ LazyDatabase _openConnection() {
   });
 }
 
-@UseMoor(tables: [])
+@UseMoor(
+    tables: [Users, Places, Addresses, Telephones, Therapists],
+    daos: [PlacesDao, AddressesDao, TelephoneDao, TherapistsDao])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
